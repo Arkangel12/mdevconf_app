@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
       create: (context) => GetIt.I<DataProvider>()..getEpisodes(),
       child: MaterialApp(
         title: 'Flutter Is Awesome',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: ThemeData.light(),
         home: HomePage(),
       ),
     );

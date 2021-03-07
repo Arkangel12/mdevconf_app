@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.episodesPage == null) {
             return Center(child: CircularProgressIndicator());
           }
+
           if (snapshot.errorMessage != null) {
             return Center(child: Text(snapshot.errorMessage));
           }
