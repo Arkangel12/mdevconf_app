@@ -5,26 +5,35 @@ import 'package:mdevconf_app/domain/get_episode_page_use_case.dart';
 class DataProvider extends ChangeNotifier {
   final GetEpisodePageUseCase _getEpisodePageUseCase;
 
-  DataProvider(this._getEpisodePageUseCase)
-      : assert(_getEpisodePageUseCase != null);
+  DataProvider(this._getEpisodePageUseCase) {
+    getEpisodes();
+  }
 
-  EpisodesPage _episodesPage;
+  bool loading = false;
 
-  EpisodesPage get episodesPage => _episodesPage;
+  EpisodesPage? _episodesPage;
 
-  List<Result> get episodes => _episodesPage.results;
+  EpisodesPage? get episodesPage => _episodesPage;
 
-  String _errorMessage;
+  List<Result>? get episodes => _episodesPage!.results;
 
-  String get errorMessage => _errorMessage;
+  String? _errorMessage;
+
+  String? get errorMessage => _errorMessage;
 
   void getEpisodes() async {
     try {
+      load();
       _episodesPage = await _getEpisodePageUseCase();
     } catch (e) {
       _errorMessage = 'error : ${e.toString()}';
-    } finally{
-      notifyListeners();
+    } finally {
+      load(false);
     }
+  }
+
+  void load([bool isLoading = true]){
+    loading = isLoading;
+    notifyListeners();
   }
 }

@@ -8,10 +8,9 @@ abstract class DataRepository {
 class DataRepositoryImpl extends DataRepository {
   final DataApiService _dataApiService;
 
-  DataRepositoryImpl(this._dataApiService) : assert(_dataApiService != null);
+  DataRepositoryImpl(this._dataApiService);
 
   @override
-  Future<EpisodesPage> getEpisodePage() async {
-    return await _dataApiService.getEpisodePage();
-  }
+  Future<EpisodesPage> getEpisodePage() async =>
+      await _dataApiService.getEpisodePage();
 }

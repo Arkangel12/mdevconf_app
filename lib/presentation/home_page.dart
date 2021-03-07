@@ -14,21 +14,27 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text('mDevConf')),
       body: Consumer<DataProvider>(
         builder: (_, snapshot, __) {
-          if (snapshot.episodesPage == null) {
+          if (snapshot.loading) {
             return Center(child: CircularProgressIndicator());
           }
-          if (snapshot.errorMessage != null) {
-            return Center(child: Text(snapshot.errorMessage));
-          }
 
-          if (snapshot.episodes.isEmpty) {
-            return Center(child: Text('Vacio'));
+          if (snapshot.errorMessage != null) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(snapshot.errorMessage!),
+              ),
+            );
           }
 
           final result = snapshot.episodes;
 
+          if (snapshot.episodes!.isEmpty) {
+            return Center(child: Text('Vacio'));
+          }
+
           return ListView.builder(
-            itemCount: result.length,
+            itemCount: result!.length,
             itemBuilder: (_, index) {
               return ListTile(
                 title: Text(result[index].name),

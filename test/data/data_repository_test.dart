@@ -7,8 +7,8 @@ import 'package:mockito/mockito.dart';
 class MockDataApiService extends Mock implements DataApiService {}
 
 void main() {
-  MockDataApiService mockDataApiService;
-  DataRepository dataRepository;
+  late MockDataApiService mockDataApiService;
+  late DataRepository dataRepository;
 
   group('data repository', () {
     setUp(() {
@@ -22,12 +22,12 @@ void main() {
         3,
         (index) => Result(
           id: index,
-          name: null,
-          airDate: null,
-          episode: null,
-          characters: null,
-          url: null,
-          created: null,
+          name: 'name',
+          airDate: DateTime(2021).toString(),
+          episode: 'episode 1',
+          characters: ['1'],
+          url: 'url',
+          created: DateTime(2021),
         ),
       );
       var episodePage = EpisodesPage(info: info, results: resultEpisode);
